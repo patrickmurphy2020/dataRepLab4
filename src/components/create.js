@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Create extends Component {
     constructor() {
@@ -17,6 +18,20 @@ class Create extends Component {
     handleSubmit(event) {
         event.preventDefault();
         console.log("Name:" +this.state.Title+ " Year:" +this.state.Year + " Poster:" +this.state.Poster);
+    
+        const newMovie = {
+            title:this.state.Title,
+            year:this.state.Year,
+            poster:this.state.Poster
+        }
+        //updates the api
+        axios.post('http://localhost:4000/api/movies',newMovie)
+        .then((res)=> {
+           console.log(res) 
+        })
+        .catch((err)=> {
+           console.log(err) 
+        });
     }
 
     onChangeMovieName(event) {
